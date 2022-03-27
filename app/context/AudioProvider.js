@@ -40,7 +40,6 @@ export class AudioProvider extends Component {
             first: media.totalCount,
         });
         this.totalCount = media.totalCount;
-        console.log(this.totalCount)
         this.setState({...this.state, audioFiles: media.assets});
     }
 

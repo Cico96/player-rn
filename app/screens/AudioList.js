@@ -115,7 +115,7 @@ export class AudioList extends Component {
                         console.log('play')
                     }}
                     onPlaylistPress = {() => {
-                        console.log('playlist')
+                        this.props.navigation.navigate('PlayList');
                     }}
                     currentItem = {this.currentItem}
                     onClose={() => {
