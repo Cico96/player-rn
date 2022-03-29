@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import PlayerButton from '../components/PlayerButton';
 import { AudioContext } from '../context/AudioProvider'
-import { pause, play, playNext, resume } from '../audioController';
+import { pause, play, playNext, resume, storeAudio } from '../audioController';
 
 
 const { width } = Dimensions.get('window');
@@ -57,12 +57,28 @@ const Player = () => {
 
     const handleNext = async () => {
         const {isLoaded} = await context.playback.getStatusAsync();
-        const audio = context.audioFiles[context.currentAudioIndex + 1]
+        const isLastAudio = context.currentAudioIndex + 1 === context.totalCount;
+        let audio = context.audioFiles[context.currentAudioIndex + 1]
         let index;
         let status;
-        if(isLoaded) {
+
+        if(!isLoaded && !isLastAudio) {
+            index = context.currentAudioIndex + 1;
+            status = await play(context.playback, audio.uri);
+        }
+        if(isLoaded && !isLastAudio) {
             index = context.currentAudioIndex + 1;
             status = await playNext(context.playback, audio.uri);
+        }
+        if(isLastAudio) {
+            index = 0;
+            audio = context.audioFiles[index];
+            if(isLoaded) {
+                status = await playNext(context.playback, audio.uri);
+            } else {
+                status = await play(context.playback, audio.uri);
+            }
+           
         }
         context.updateState(context, {
             currentAudio: audio,
@@ -70,7 +86,8 @@ const Player = () => {
             sound: status,
             isPlaying: true,
             currentAudioIndex: index
-        })
+        });
+        storeAudio(audio, index);
     }
 
     const handlePrev = async () => {

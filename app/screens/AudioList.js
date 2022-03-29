@@ -37,7 +37,8 @@ export class AudioList extends Component {
                     currentAudioIndex: 0,
                     playbackPosition: null,
                     playbackPosition: null
-                })
+                });
+                return await storeAudio(this.context.audioFiles[0], 0);
             }
             const audio = this.context.audioFiles[nextAudioIndex];
             const status = await playNext(this.context.playback, audio.uri);
