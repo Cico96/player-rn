@@ -4,7 +4,7 @@ import AudioListItem from '../components/AudioListItem';
 import OptionModal from '../components/OptionModal';
 import { AudioContext } from '../context/AudioProvider';
 import { Audio } from 'expo-av';
-import {pause, play, playNext, resume} from '../audioController'
+import {pause, play, playNext, resume, storeAudio} from '../audioController'
 
 export class AudioList extends Component {
     static contextType = AudioContext;
@@ -46,7 +46,8 @@ export class AudioList extends Component {
                 currentAudio: audio,
                 isPlaying: true,
                 currentAudioIndex: nextAudioIndex
-            })
+            });
+            await storeAudio(audio, nextAudioIndex);
         }
     }
 
@@ -67,8 +68,8 @@ export class AudioList extends Component {
                 currentAudio: audio, 
                 isPlaying: true, 
                 currentAudioIndex: index});
-            return playback.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
-            //return this.setState({...this.state, playback: playback, sound: soundStatus, currentAudio: audio})
+            playback.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
+            return storeAudio(audio, index);
         }
 
         //metto in pausa l'audio premendo sull'item
@@ -87,14 +88,24 @@ export class AudioList extends Component {
         if(sound.isLoaded && currentAudio.id !== audio.id) {
             const soundStatus = await playNext(playback, audio.uri);
             const index = audioFiles.indexOf(audio);
-            return updateState(this.context, { sound: soundStatus, currentAudio: audio, isPlaying: true, currentAudioIndex: index });
+            updateState(this.context, { 
+                sound: soundStatus, 
+                currentAudio: audio, 
+                isPlaying: true, 
+                currentAudioIndex: index 
+            });
+            return storeAudio();
         }
     }
 
+    componentDidMount() {
+        this.context.loadStoreAudio();
+    }
 
     modalView = () => {
         this.setState({...this.state, optionModalVisible: true});
     }
+
     render() {
         return(
            <View>
@@ -113,9 +124,6 @@ export class AudioList extends Component {
                 <OptionModal
                     onPlayPress = {() => {
                         console.log('play')
-                    }}
-                    onPlaylistPress = {() => {
-                        this.props.navigation.navigate('PlayList');
                     }}
                     currentItem = {this.currentItem}
                     onClose={() => {

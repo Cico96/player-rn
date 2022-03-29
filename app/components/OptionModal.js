@@ -14,9 +14,9 @@ const OptionModal = ({visible, currentItem, onClose, onPlayPress, onPlaylistPres
                         <TouchableWithoutFeedback onPress={() => onPlayPress()}>
                             <Text style={styles.option}>Play</Text>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={onPlaylistPress}>
+                        {/* <TouchableWithoutFeedback onPress={onPlaylistPress}>
                             <Text style={styles.option}>Add to Playlist</Text>
-                        </TouchableWithoutFeedback>
+                        </TouchableWithoutFeedback> */}
                     </View>
                 </View>
                 <TouchableWithoutFeedback onPress={onClose}>

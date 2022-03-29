@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import color from "../color";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -20,6 +20,10 @@ const Player = () => {
         }
         return 0;
     }
+
+    useEffect(() => {
+        context.loadStoreAudio();
+    }, []);
 
     const handlePlayPause = async () => {
 
@@ -100,6 +104,8 @@ const Player = () => {
             currentAudioIndex: index
         })
     }
+
+    if(!context.currentAudio) return null;
 
     return <View style={styles.container}>
         <View style={styles.midContainer}>
