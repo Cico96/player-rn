@@ -57,7 +57,6 @@ export class AudioList extends Component {
         const { sound, playback, currentAudio, updateState, audioFiles } = this.context;
        //controllo se è la prima volta che viene avviato l'audio premendo sull'item
         if(sound === null) {
-            console.log('ok')
             const playback = new Audio.Sound();
             const soundStatus = await play(playback, audio.uri);
 
