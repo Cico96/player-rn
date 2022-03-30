@@ -3,10 +3,6 @@ import color from '../color';
 import { AntDesign } from '@expo/vector-icons'
 
 const PlayerButton = (props) => {
-    const { iconType,
-            size = 40,
-            onPress
-    } = props;
 
     const getIconName = (type) => {
         switch(type) {
@@ -22,7 +18,7 @@ const PlayerButton = (props) => {
     }
 
     return(
-        <AntDesign {...props} onPress={onPress} name={getIconName(iconType)} size={size} color={color.FONT}></AntDesign>
+        <AntDesign {...props} name={getIconName(props.iconType)} color={color.FONT}></AntDesign>
     );
 
 }

@@ -3,7 +3,7 @@ import { View, StyleSheet, Modal, Text, TouchableWithoutFeedback } from "react-n
 import color from "../color";
 
 const OptionModal = ({visible, currentItem, onClose, onPlayPress}) => {
-    const { filename } = currentItem;
+    const { filename, duration } = currentItem;
     return (
             <Modal animationType="slide" trasparent visible={visible}>
                 <View style={styles.modal}>
@@ -11,8 +11,8 @@ const OptionModal = ({visible, currentItem, onClose, onPlayPress}) => {
                         {filename}
                     </Text>
                     <View style={styles.optionContainer}>
-                        <TouchableWithoutFeedback onPress={() => onPlayPress()}>
-                            <Text style={styles.option}>Play</Text>
+                        <TouchableWithoutFeedback >
+                            <Text style={styles.option}>{duration}</Text>
                         </TouchableWithoutFeedback>
                     </View>
                 </View>

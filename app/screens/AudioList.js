@@ -53,7 +53,6 @@ export class AudioList extends Component {
     }
 
     handleAudioPress = async (audio) => {
-
         const { sound, playback, currentAudio, updateState, audioFiles } = this.context;
        //controllo se è la prima volta che viene avviato l'audio premendo sull'item
         if(sound === null) {
@@ -124,9 +123,6 @@ export class AudioList extends Component {
                     ))}
                 </ScrollView>
                 <OptionModal
-                    onPlayPress = {() => {
-                        console.log('play')
-                    }}
                     currentItem = {this.currentItem}
                     onClose={() => {
                     this.setState({...this.state, optionModalVisible: false})

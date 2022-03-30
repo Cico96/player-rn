@@ -136,12 +136,13 @@ const Player = () => {
                 maximumTrackTintColor={color.ACTIVE_BG}
             />
             <View style={styles.audioController}>
-                <PlayerButton iconType='PREV' onPress={handlePrev}/>
+                <PlayerButton size={40} iconType='PREV' onPress={handlePrev}/>
                 <PlayerButton 
+                size={40}
                 onPress={handlePlayPause} 
                 style={{marginHorizontal: 25}} 
                 iconType={context.isPlaying ? 'PLAY' : 'PAUSE'} />
-                <PlayerButton iconType='NEXT' onPress={handleNext} />
+                <PlayerButton size={40} iconType='NEXT' onPress={handleNext} />
             </View>
         </View>
     </View>
