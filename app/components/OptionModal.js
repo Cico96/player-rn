@@ -11,7 +11,7 @@ const OptionModal = ({visible, currentItem, onClose, onPlayPress}) => {
                         {filename}
                     </Text>
                     <View style={styles.optionContainer}>
-                        <TouchableWithoutFeedback >
+                        <TouchableWithoutFeedback>
                             <Text style={styles.option}>{duration}</Text>
                         </TouchableWithoutFeedback>
                     </View>

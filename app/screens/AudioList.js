@@ -19,6 +19,7 @@ export class AudioList extends Component {
     }
 
     onPlaybackStatusUpdate = async (playbackStatus) => {
+        //controllo sullo status del playback al reload dell'app
         if(playbackStatus.isLoaded && playbackStatus.isPlaying){
             this.context.updateState(this.context, {
                 playbackPosition: playbackStatus.positionMillis,
@@ -56,6 +57,7 @@ export class AudioList extends Component {
         const { sound, playback, currentAudio, updateState, audioFiles } = this.context;
        //controllo se è la prima volta che viene avviato l'audio premendo sull'item
         if(sound === null) {
+            console.log('ok')
             const playback = new Audio.Sound();
             const soundStatus = await play(playback, audio.uri);
 
