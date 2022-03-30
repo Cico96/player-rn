@@ -19,7 +19,6 @@ const AudioListItem = ({title, duration, onOptionPress, onAudioPress, isPlaying,
             <View style={styles.leftContainer}>
                 <View style={styles.thumbnail}>
                     <Text style={styles.thumbnailText}>
-                        {/* {getThumbnail(title)} */}
                         {activeItem ? playPauseIcon(isPlaying) : getThumbnail(title)}
                     </Text>
                 </View>

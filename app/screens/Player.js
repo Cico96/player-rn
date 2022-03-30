@@ -106,11 +106,8 @@ const Player = () => {
             status = await playNext(context.playback, audio.uri);
         }
         if(isFirstAudio) {
-            //console.log(context.totalCount, 'tot')
             index = context.totalCount - 1;
-            //console.log(index);
             audio = context.audioFiles[index];
-            //console.log(audio);
             status = await playNext(context.playback, audio.uri);
         }
         context.updateState(context, {

@@ -68,7 +68,8 @@ export class AudioList extends Component {
                 sound: soundStatus, 
                 currentAudio: audio, 
                 isPlaying: true, 
-                currentAudioIndex: index});
+                currentAudioIndex: index
+            });
             playback.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
             return storeAudio(audio, index);
         }

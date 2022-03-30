@@ -6,6 +6,7 @@ import { Audio } from "expo-av";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const AudioContext = createContext();
+
 export class AudioProvider extends Component {
     constructor(props) {
         super(props);
@@ -39,6 +40,7 @@ export class AudioProvider extends Component {
         media = await MediaLibrary.getAssetsAsync({
             mediaType: 'audio',
             first: media.totalCount,
+            //prendere tutti gli audio tramite getassests
         });
         this.totalCount = media.totalCount;
         this.setState({...this.state, audioFiles: media.assets});
@@ -47,19 +49,16 @@ export class AudioProvider extends Component {
     getPermission = async () => {
         const permission = await MediaLibrary.getPermissionsAsync();
         if(permission.granted) {
-            //we want to get all the audiofiles
             this.getAudioFiles();
         }
 
         if(!permission.granted && permission.canAskAgain) {
             const {status, canAskAgain} = await MediaLibrary.requestPermissionsAsync();
             if(status === 'denied' && canAskAgain) {
-                //we are going to display alert that user must allow this permission
                 this.permissionAlert();
             }
 
             if(status === 'granted') {
-                //we want all the audio files
                 this.getAudioFiles();
             }
             
@@ -70,7 +69,6 @@ export class AudioProvider extends Component {
         let storeAudio = await AsyncStorage.getItem('storeAudio');
         let currentAudio;
         let currentAudioIndex;
-
         if(storeAudio === null) {
             currentAudio = this.state.audioFiles[0];
             currentAudioIndex = 0;
@@ -79,7 +77,7 @@ export class AudioProvider extends Component {
             currentAudio = storeAudio.audio;
             currentAudioIndex = storeAudio.index;
         }
-
+        
         this.setState({...this.state, currentAudio, currentAudioIndex})
     }
 

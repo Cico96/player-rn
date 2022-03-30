@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Modal, Text, TouchableWithoutFeedback } from "react-native";
 import color from "../color";
 
-const OptionModal = ({visible, currentItem, onClose, onPlayPress, onPlaylistPress}) => {
+const OptionModal = ({visible, currentItem, onClose, onPlayPress}) => {
     const { filename } = currentItem;
     return (
             <Modal animationType="slide" trasparent visible={visible}>
@@ -14,9 +14,6 @@ const OptionModal = ({visible, currentItem, onClose, onPlayPress, onPlaylistPres
                         <TouchableWithoutFeedback onPress={() => onPlayPress()}>
                             <Text style={styles.option}>Play</Text>
                         </TouchableWithoutFeedback>
-                        {/* <TouchableWithoutFeedback onPress={onPlaylistPress}>
-                            <Text style={styles.option}>Add to Playlist</Text>
-                        </TouchableWithoutFeedback> */}
                     </View>
                 </View>
                 <TouchableWithoutFeedback onPress={onClose}>
