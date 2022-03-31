@@ -43,7 +43,6 @@ export const playNext = async (playback, uri) => {
 
 
 export const storeAudio = async (audio, index) => {
-    //Store l'oggetto audio per renderizzare il player 
     //l index per la lista cosi sappiamo l indice dell audio selezionato
     await AsyncStorage.setItem('storeAudio', JSON.stringify({audio, index}))
 }
